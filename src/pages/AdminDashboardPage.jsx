@@ -31,31 +31,32 @@ const AdminDashboardPage = () => {
 
   const { user } = useAuthStore();
 
+  // Fetch dashboard data function
+  const fetchDashboardData = async () => {
+    try {
+      setIsLoading(true);
+
+      // Fetch dashboard stats
+      const statsResponse = await adminService.getDashboardStats();
+      setStats(statsResponse.data.data);
+
+      // Fetch recent products
+      const productsResponse = await adminService.getRecentProducts();
+      setRecentProducts(productsResponse.data.data);
+
+      // Fetch recent users
+      const usersResponse = await adminService.getRecentUsers();
+      setRecentUsers(usersResponse.data.data);
+    } catch (error) {
+      console.error("Error fetching dashboard data:", error);
+      toast.error("Failed to load dashboard data");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Fetch real data from API
   useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        setIsLoading(true);
-
-        // Fetch dashboard stats
-        const statsResponse = await adminService.getDashboardStats();
-        setStats(statsResponse.data.data);
-
-        // Fetch recent products
-        const productsResponse = await adminService.getRecentProducts();
-        setRecentProducts(productsResponse.data.data);
-
-        // Fetch recent users
-        const usersResponse = await adminService.getRecentUsers();
-        setRecentUsers(usersResponse.data.data);
-      } catch (error) {
-        console.error("Error fetching dashboard data:", error);
-        toast.error("Failed to load dashboard data");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchDashboardData();
   }, []);
 
