@@ -62,7 +62,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
         price: parseFloat(formData.price),
         category: formData.category,
         stock: parseInt(formData.stock) || 0,
-        isFeatured: formData.isFeatured,
+        isFeatured: Boolean(formData.isFeatured),
       };
 
       // Only add comparePrice if it's provided and greater than 0
