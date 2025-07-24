@@ -51,7 +51,12 @@ const adminService = {
     return api.get("/categories", {
       params: {
         _t: Date.now(), // Cache busting parameter
+        _v: Math.random() // Additional cache busting
       },
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
     });
   },
 };
