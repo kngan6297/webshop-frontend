@@ -22,9 +22,16 @@ jobs:
       - name: Deploy frontend over SSH
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 22
+
             cd /root/client/webshop-frontend
             git pull origin master
             npm install
             npm run build
-            sudo cp -r dist/* /var/www/webshop/
+
+            # Copy build to Nginx directory
+            rm -rf /var/www/webshop/*
+            cp -r dist/* /var/www/webshop/
           EOF
