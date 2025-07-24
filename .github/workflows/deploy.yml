@@ -23,7 +23,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             cd /root/client/webshop-frontend
-            git pull origin main
+            git pull origin master
             npm install
             npm run build
             sudo cp -r dist/* /var/www/webshop/
