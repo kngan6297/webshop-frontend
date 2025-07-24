@@ -20,6 +20,17 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
   useEffect(() => {
     if (isOpen) {
       fetchCategories();
+      // Reset form data when modal opens
+      setFormData({
+        name: "",
+        description: "",
+        price: "",
+        comparePrice: "",
+        stock: "",
+        category: "",
+        images: [],
+        isFeatured: false,
+      });
     }
   }, [isOpen]);
 
