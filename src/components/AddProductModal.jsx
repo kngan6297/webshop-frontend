@@ -70,6 +70,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
         productData.comparePrice = parseFloat(formData.comparePrice);
       }
 
+      console.log("Sending product data:", productData);
       const response = await adminService.createProduct(productData);
 
       toast.success("Product created successfully!");
@@ -87,6 +88,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
       });
     } catch (error) {
       console.error("Error creating product:", error);
+      console.error("Error response:", error.response?.data);
       toast.error(error.response?.data?.message || "Failed to create product");
     } finally {
       setIsLoading(false);
