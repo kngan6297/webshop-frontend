@@ -26,6 +26,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
   const fetchCategories = async () => {
     try {
       const response = await adminService.getCategories();
+      console.log("Fetched categories:", response.data.data);
       setCategories(response.data.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -71,6 +72,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
       }
 
       console.log("Sending product data:", productData);
+      console.log("Selected category ID:", formData.category);
       const response = await adminService.createProduct(productData);
 
       toast.success("Product created successfully!");
