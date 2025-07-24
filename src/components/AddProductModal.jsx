@@ -43,19 +43,34 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.price || !formData.category) {
+    if (
+      !formData.name ||
+      !formData.price ||
+      !formData.category ||
+      !formData.description ||
+      formData.stock === ""
+    ) {
       toast.error("Please fill in all required fields");
       return;
     }
 
     try {
       setIsLoading(true);
-      const response = await adminService.createProduct({
-        ...formData,
+      const productData = {
+        name: formData.name.trim(),
+        description: formData.description.trim(),
         price: parseFloat(formData.price),
-        comparePrice: parseFloat(formData.comparePrice) || 0,
+        category: formData.category,
         stock: parseInt(formData.stock) || 0,
-      });
+        isFeatured: formData.isFeatured,
+      };
+
+      // Only add comparePrice if it's provided and greater than 0
+      if (formData.comparePrice && parseFloat(formData.comparePrice) > 0) {
+        productData.comparePrice = parseFloat(formData.comparePrice);
+      }
+
+      const response = await adminService.createProduct(productData);
 
       toast.success("Product created successfully!");
       onProductAdded(response.data.data);
@@ -169,7 +184,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Stock
+                Stock *
               </label>
               <input
                 type="number"
@@ -177,6 +192,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
                 value={formData.stock}
                 onChange={handleChange}
                 min="0"
+                required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:outline-none"
                 placeholder="0"
               />
@@ -198,13 +214,14 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Description
+              Description *
             </label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
               rows="4"
+              required
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:outline-none"
               placeholder="Enter product description"
             />
