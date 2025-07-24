@@ -88,7 +88,7 @@ const RegisterPage = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="flex flex-col items-center space-y-4">
           <div className="h-12 w-12 bg-primary-600 rounded-lg flex items-center justify-center shadow-sm">
-            <span className="text-white font-bold text-xl">E</span>
+            <span className="text-white font-bold text-xl">W</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center">
             Create your account

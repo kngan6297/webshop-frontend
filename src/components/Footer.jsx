@@ -8,10 +8,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                W
-              </div>
-              <span className="text-xl font-bold tracking-tight">ebShop</span>
+              <span className="text-2xl font-bold text-primary-600">
+                WebShop
+              </span>
             </div>
             <p className="text-sm text-gray-400 mb-6 max-w-md leading-relaxed">
               Your one-stop shop for quality products and fast delivery. We're
