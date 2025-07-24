@@ -48,7 +48,11 @@ const adminService = {
 
   // Get categories
   getCategories: () => {
-    return api.get("/categories");
+    return api.get("/categories", {
+      params: {
+        _t: Date.now(), // Cache busting parameter
+      },
+    });
   },
 };
 

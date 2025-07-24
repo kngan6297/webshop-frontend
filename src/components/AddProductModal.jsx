@@ -38,6 +38,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
     try {
       const response = await adminService.getCategories();
       console.log("Fetched categories:", response.data.data);
+      console.log("Category IDs:", response.data.data.map(cat => ({ id: cat._id, name: cat.name })));
       setCategories(response.data.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
