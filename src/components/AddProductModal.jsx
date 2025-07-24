@@ -86,6 +86,7 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
 
       console.log("Sending product data:", productData);
       console.log("Selected category ID:", formData.category);
+      console.log("Product name being sent:", productData.name);
       const response = await adminService.createProduct(productData);
 
       toast.success("Product created successfully!");
