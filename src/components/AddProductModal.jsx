@@ -77,6 +77,8 @@ const AddProductModal = ({ isOpen, onClose, onProductAdded }) => {
         category: formData.category,
         stock: parseInt(formData.stock) || 0,
         isFeatured: Boolean(formData.isFeatured),
+        sku: `SKU-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        images: []
       };
 
       // Only add comparePrice if it's provided and greater than 0
